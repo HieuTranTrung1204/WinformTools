@@ -21,13 +21,14 @@ namespace Test
         {
             InitializeComponent();
         }
-        private DataGridView dataGridView1 = new DataGridView();
+     
         private BindingSource bindingSource1 = new BindingSource();
+
+        List<Knight> listdata = new List<Knight>();
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            List<Knight> listdata = new List<Knight>();
             listdata.Add(new Knight(Title.King, "Uther", true, Image.FromFile(@"Resources\icon_places.png")));
             listdata.Add(new Knight(Title.King, "Arthur", true, Image.FromFile(@"Resources\icon_hashtags.png")));
             listdata.Add(new Knight(Title.Sir, "Mordred", false, Image.FromFile(@"Resources\icon_places.png")));
@@ -78,6 +79,16 @@ namespace Test
             combo.DataPropertyName = "Title";
             combo.Name = "Title";
             return combo;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string text = textBox1.Text;
+            if (text.Length > 0)
+            {
+                bindingSource1.DataSource = listdata;
+                dataGridView1.DataSource = bindingSource1;
+            }
         }
     }
 }

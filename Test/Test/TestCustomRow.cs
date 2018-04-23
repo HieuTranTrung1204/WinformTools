@@ -19,11 +19,12 @@ namespace Test
         private bool good;
         private Title hisTitle;
 
-        public Knight(Title title, string name, bool good)
+        public Knight(Title title, string name, bool good, Image img)
         {
             hisTitle = title;
             hisName = name;
             this.good = good;
+            this.Avt = img;
         }
 
         public Knight()

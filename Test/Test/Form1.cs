@@ -28,20 +28,13 @@ namespace Test
         {
 
             List<Knight> listdata = new List<Knight>();
-            listdata.Add(new Knight(Title.King, "Uther", true));
-            listdata.Add(new Knight(Title.King, "Arthur", true));
-            listdata.Add(new Knight(Title.Sir, "Mordred", false));
-            listdata.Add(new Knight(Title.Sir, "Gawain", true));
-            listdata.Add(new Knight(Title.Sir, "Galahad", true));
+            listdata.Add(new Knight(Title.King, "Uther", true, Image.FromFile(@"Resources\icon_places.png")));
+            listdata.Add(new Knight(Title.King, "Arthur", true, Image.FromFile(@"Resources\icon_hashtags.png")));
+            listdata.Add(new Knight(Title.Sir, "Mordred", false, Image.FromFile(@"Resources\icon_places.png")));
+            listdata.Add(new Knight(Title.Sir, "Gawain", true, Image.FromFile(@"Resources\icon_hashtags.png")));
+            listdata.Add(new Knight(Title.Sir, "Galahad", true, Image.FromFile(@"Resources\icon_places.png")));
 
             bindingSource1.DataSource = listdata;
-
-            // Populate the data source.
-            //bindingSource1.Add(new Knight(Title.King, "Uther", true));
-            //bindingSource1.Add(new Knight(Title.King, "Arthur", true));
-            //bindingSource1.Add(new Knight(Title.Sir, "Mordred", false));
-            //bindingSource1.Add(new Knight(Title.Sir, "Gawain", true));
-            //bindingSource1.Add(new Knight(Title.Sir, "Galahad", true));
 
             // Initialize the DataGridView.
             dataGridView1.AutoGenerateColumns = false;
@@ -64,10 +57,12 @@ namespace Test
 
             // Inittialize and add image
             DataGridViewImageColumn ic = new DataGridViewImageColumn();
-            ic.HeaderText = "Payment";
-            ic.Image = null;
-            ic.Name = "cImg";
-            ic.Width = 50;
+            ic.HeaderText = "Hình";
+            ic.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            ic.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ic.Name = "Av111t";
+            ic.DataPropertyName = "Avt";
+            ic.Width = 25;
             dataGridView1.Columns.Add(ic);
 
             // Initialize the form.

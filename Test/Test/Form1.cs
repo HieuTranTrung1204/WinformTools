@@ -28,18 +28,9 @@ namespace Test
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            listdata.Add(new Knight(Title.King, "Uther", true, Image.FromFile(@"Resources\icon_places.png")));
-            listdata.Add(new Knight(Title.King, "Arthur", true, Image.FromFile(@"Resources\icon_hashtags.png")));
-            listdata.Add(new Knight(Title.Sir, "Mordred", false, Image.FromFile(@"Resources\icon_places.png")));
-            listdata.Add(new Knight(Title.Sir, "Gawain", true, Image.FromFile(@"Resources\icon_hashtags.png")));
-            listdata.Add(new Knight(Title.Sir, "Galahad", true, Image.FromFile(@"Resources\icon_places.png")));
-
-            bindingSource1.DataSource = listdata;
-
             // Initialize the DataGridView.
             dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.AutoSize = true;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.DataSource = bindingSource1;
 
             dataGridView1.Columns.Add(CreateComboBoxWithEnums());
@@ -63,13 +54,27 @@ namespace Test
             ic.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             ic.Name = "Av111t";
             ic.DataPropertyName = "Avt";
-            ic.Width = 25;
             dataGridView1.Columns.Add(ic);
 
             // Initialize the form.
             this.Controls.Add(dataGridView1);
             this.AutoSize = true;
             this.Text = "DataGridView object binding demo";
+            
+            listdata.Add(new Knight(Title.King, "Uther", true, Image.FromFile(@"Resources\icon_places.png")));
+            listdata.Add(new Knight(Title.King, "Arthur", true, Image.FromFile(@"Resources\icon_hashtags.png")));
+            listdata.Add(new Knight(Title.Sir, "Mordred", false, Image.FromFile(@"Resources\icon_users.png")));
+            listdata.Add(new Knight(Title.Sir, "Gawain", true, Image.FromFile(@"Resources\icon_hashtags.png")));
+            for (int i = 0; i < 100; i++)
+            {
+                listdata.Add(new Knight(Title.Sir, "Galahad", true, Image.FromFile(@"Resources\icon_users.png")));
+
+            }
+
+            bindingSource1.DataSource = listdata;
+
+            dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvUserDetails_RowPostPaint);
+
         }
 
         DataGridViewComboBoxColumn CreateComboBoxWithEnums()
@@ -90,5 +95,13 @@ namespace Test
                 dataGridView1.DataSource = bindingSource1;
             }
         }
+        private void dgvUserDetails_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            using (SolidBrush b = new SolidBrush(dataGridView1.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
+            }
+        }
+
     }
 }
